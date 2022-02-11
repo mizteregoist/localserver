@@ -1,6 +1,14 @@
 # localserver
 The simple docker container helps you to develop more awesome web apps
 
+localserver include these packages:
+* MariaDB 10.2
+* Postgres 12.7
+* Nginx 1.21
+* pgAdmin 4
+* phpMyAdmin 5.1.1
+* Redis 7.0
+
 If you haven't python3 on your machine, install it for generating .env file.
 
 Before run docker container you need to generate .env file by run command:
