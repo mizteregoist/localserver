@@ -1,0 +1,93 @@
+version: '3.3'
+
+services:
+
+  nginx:
+    restart: always
+    image: nginx:1.21.0-alpine
+    environment:
+      - NGINX_ENTRYPOINT_QUIET_LOGS=1
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:443:443"
+    networks:
+      - localnet
+
+  pgsql:
+    restart: always
+    image: postgres:12.7-alpine
+    volumes:
+      - ./data/db/pgsql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${PGSQL_USER}
+      - POSTGRES_PASSWORD=${PGSQL_PASS}
+      - POSTGRES_DB=${PGSQL_NAME}
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - localnet
+
+  pgadmin:
+    restart: always
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASS}
+    ports:
+      - "127.0.0.1:5050:80"
+    networks:
+      - localnet
+    depends_on:
+      - pgsql
+    links:
+      - pgsql
+
+  mysql:
+    restart: always
+    image: mariadb:10.2
+    volumes:
+      - ./data/db/mysql:/var/lib/mysql
+    ports:
+      - "127.0.0.1:3306:3306"
+    networks:
+      - localnet
+    environment:
+      - MARIADB_USER=${MYSQL_USER}
+      - MARIADB_PASSWORD=${MYSQL_PASS}
+      - MARIADB_DATABASE=${MYSQL_NAME}
+      - MARIADB_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
+
+  phpmyadmin:
+    restart: always
+    image: phpmyadmin:5.1.1-apache
+    environment:
+      - PMA_HOST=host.docker.internal
+      - PMA_PORT=3306
+      - PMA_PMADB=phpmyadmin
+      - PMA_USER=${PMA_USER}
+      - PMA_PASSWORD=${PMA_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASS}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
+    ports:
+      - "127.0.0.1:5070:80"
+    networks:
+      - localnet
+    depends_on:
+      - mysql
+    links:
+      - mysql
+
+  redis:
+    restart: always
+    image: redis:7.0-rc-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+    networks:
+      - localnet
+
+networks:
+  localnet:
+    driver: bridge
