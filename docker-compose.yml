@@ -22,6 +22,7 @@ services:
     image: postgres:12.7-alpine
     volumes:
       - ./data/db/pgsql:/var/lib/postgresql/data
+      - ./data/db/backup:/home/backup
     environment:
       - POSTGRES_USER=${PGSQL_USER}
       - POSTGRES_PASSWORD=${PGSQL_PASS}
@@ -51,6 +52,7 @@ services:
     image: mariadb:10.2
     volumes:
       - ./data/db/mysql:/var/lib/mysql
+      - ./data/db/backup:/home/backup
     ports:
       - "127.0.0.1:3306:3306"
     networks:
