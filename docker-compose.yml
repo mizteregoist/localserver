@@ -58,10 +58,10 @@ services:
     networks:
       - localnet
     environment:
-      - MARIADB_USER=${MYSQL_USER}
-      - MARIADB_PASSWORD=${MYSQL_PASS}
-      - MARIADB_DATABASE=${MYSQL_NAME}
-      - MARIADB_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASS}
+      - MYSQL_DATABASE=${MYSQL_NAME}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
 
   phpmyadmin:
     restart: always
