@@ -15,10 +15,15 @@ Before run docker container you need to generate .env file by run command:
 > py init_env.py
 
 For add another site in nginx configs:
+
 > py add_site.py
+
 or
+
 > py add_site.py -s example.local -p 8080
+
 or
+
 > py add_site.py --site=example.local --port=8080
 
 After generating .env file you can do these command to run docker container:
