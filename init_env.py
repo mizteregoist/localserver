@@ -1,4 +1,5 @@
-import shutil
+#!/usr/bin/python
+
 import string
 import random
 from pathlib import Path
