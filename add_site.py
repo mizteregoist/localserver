@@ -2,6 +2,7 @@
 
 import sys
 import getopt
+import platform
 from pathlib import Path
 
 
@@ -40,6 +41,17 @@ def init():
         conf = open(conf_path, 'x')
         conf.write(data)
         conf.close()
+
+        os = platform.system()
+        hosts_path = ''
+        if os == 'Windows':
+            hosts_path = 'C:/Windows/System32/drivers/etc/hosts'
+        elif os == 'Linux':
+            hosts_path = '/etc/hosts'
+        if hosts_path is not None:
+            hosts = open('/etc/hosts', 'a')
+            hosts.write(f"127.0.0.1    {site}\r\n")
+            hosts.close()
     except FileExistsError as e:
         print('config already exists, delete it if you want to create a new one')
     except getopt.GetoptError:
