@@ -20,11 +20,11 @@ For add site in nginx configs run script as sudo (unix) or administrator (window
 
 or
 
-> python3 add_site.py -s example.local -p 8080
+> sudo python3 add_site.py -s example.local -p 8080
 
 or
 
-> python3 add_site.py --site=example.local --port=8080
+> sudo python3 add_site.py --site=example.local --port=8080
 
 After generating .env file you can do these command to run docker container:
 > docker-compose up -d --build

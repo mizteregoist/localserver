@@ -49,7 +49,7 @@ def init():
         elif os == 'Linux':
             hosts_path = '/etc/hosts'
         if hosts_path is not None:
-            hosts = open('/etc/hosts', 'a')
+            hosts = open(hosts_path, 'a')
             hosts.write(f"127.0.0.1    {site}\r\n")
             hosts.close()
     except FileExistsError as e:
