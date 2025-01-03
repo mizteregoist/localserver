@@ -2,12 +2,12 @@
 The simple docker container helps you to develop more awesome web apps
 
 localserver include these packages:
-* Mysql 8
-* Postgres 12.12
-* Nginx 1.22
-* pgAdmin 4
-* phpMyAdmin 5.2
-* Redis 7
+* MySQL 8
+* Postgres 17.2
+* Nginx 1.27
+* pgAdmin4 8.14
+* phpMyAdmin 5.2.1
+* Redis 7.2
 
 If you haven't python3 on your machine, install it for generating .env file.
 

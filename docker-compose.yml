@@ -1,10 +1,8 @@
-version: '3.3'
-
 services:
 
   nginx:
     restart: always
-    image: nginx:1.22.0
+    image: nginx:1.27-alpine
     container_name: nginx
     volumes:
       - ./config/etc/nginx/conf.d:/etc/nginx/conf.d
@@ -22,7 +20,7 @@ services:
 
   pgsql:
     restart: always
-    image: postgres:12.12
+    image: postgres:17.2-alpine
     container_name: pgsql
     volumes:
       - pgsql-vol:/var/lib/postgresql/data
@@ -41,7 +39,7 @@ services:
 
   pgadmin:
     restart: always
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:8.14.0
     container_name: pgadmin
     volumes:
       - pgadmin-vol:/pgadmin4
@@ -62,7 +60,7 @@ services:
     restart: always
     image: mysql:8-debian
     container_name: mysql
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql-mode=''
     volumes:
       - mysql-vol:/var/lib/mysql
     environment:
@@ -80,7 +78,7 @@ services:
 
   phpmyadmin:
     restart: always
-    image: phpmyadmin:5.2-apache
+    image: phpmyadmin:5.2.1-apache
     container_name: phpmyadmin
     environment:
       - PMA_HOST=mysql
@@ -102,7 +100,7 @@ services:
 
   redis:
     restart: always
-    image: redis:7
+    image: redis:7.2-alpine
     container_name: redis
     volumes:
       - redis-vol:/data
